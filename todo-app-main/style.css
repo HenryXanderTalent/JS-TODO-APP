@@ -1,0 +1,23 @@
+body{
+    margin: 0;
+    background-image: url("./images/bg-desktop-light.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: lightgray;
+}
+
+.todo-header {
+    color: white;
+    display: flex;
+    width: 500px;
+    margin: auto;
+    
+    background-color: black;
+    
+}
+
+.game {
+    text-align: left;
+  
+   
+}
