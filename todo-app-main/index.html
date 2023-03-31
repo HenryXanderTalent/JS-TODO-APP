@@ -7,6 +7,8 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
   
   <link rel="stylesheet" href="./style.css">
+
+  <script defer src="./script.js"></script>
   
   <title>Frontend Mentor | Todo app</title>
 
@@ -27,28 +29,36 @@
 <main>
 
   <section>
-    <div class="input-task">
+    <div class="input-task-div">
       <input id="radio-input"  type="radio"/>
-      <input type="text" placeholder="Enter Task Here"/>
+      <input id="input-task" type="text" placeholder="Enter Task Here"/>
     </div>
   </section> 
 
   <section>
     <div>
-      <div class="task-card">
-        <input type="radio" />
-        <span >fsfsfs</span>
-        <button >&times;</button>
-      </div>
-      <div class="tasks">
-          <!-- Add dynamic number --> items left
 
-          buttons/hrefs/or spans
+      <div id="dom-space-div" class="dom-space">
+
+      </div>
+
+      <div class="tasks">
+        <div>
+          <!-- Add dynamic number --> 
+          
+          <span id="items-num">5</span><span id="items-left"> items left</span>
+        </div>
+
+          <!--buttons/hrefs/or spans-->
+        <div id="filter-div">
           All
           Active 
           Completed
+        </div>
 
-          Clear Completed
+        <div id="clear-comp-div">
+          <span id="clear-comp">Clear Completed</span> 
+        </div>
       </div>
 
     </div>

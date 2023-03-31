@@ -11,20 +11,17 @@ body{
     display: flex;
     width: 500px;
     margin: auto;
-    
-    
-    
 }
 
 .game {
     text-align: left;   
 }
 
-.input-task {
+.input-task-div {
     background-color: white;
     width: 500px;
     border-radius: 3px;
-    margin: auto;
+    margin: 0px auto 15px auto;
     padding-top: 10px;
     padding-bottom: 10px;
 }
@@ -37,13 +34,56 @@ body{
 .task-card {
     background-color: white;
     width: 500px;
-    margin: 15px auto;
+    margin: 0px auto;
     padding: 10px 0px;
+    display: flex;
+    border-bottom: 1px solid black;
 }
 
-.task-card button {
+button {
     font-size: 20px;
     border: 0;
-    background-color: transparent;
+    
+    position: relative;
+    right: -400px;
+    cursor: pointer;
+    
+    color: black;
 }
 
+.task-card:hover button {
+    color: black;
+}
+
+.tasks {
+    background-color: white;
+    width: 500px;
+    margin: auto;
+    padding: 10px 0px;
+    display: flex;
+    
+}
+
+#items-left {
+    padding: 10px 15px;
+}
+
+#items-num {
+    padding: 10px;
+}
+
+#clear-comp-div {
+    display: flex;
+    margin: auto;  
+    background-color: bisque; 
+}
+
+#clear-comp {
+    text-align: right;   
+}
+
+#filter-div {
+    display: flex;
+    margin: auto;
+    
+}
