@@ -1,5 +1,6 @@
-const tasksContainer = document.getElementById("dom-space-div")
+const tasksContainer = document.getElementById("dom-space-div");
 const taskInput = document.querySelector("#input-task"); 
+
 
 taskInput.addEventListener("keydown", (e) => {
 
@@ -15,27 +16,6 @@ taskInput.addEventListener("keydown", (e) => {
 
 });
 
-
-let onEnter = function output1(task){
-    let newcard = document.createElement('div')
-    tasksContainer.appendChild(newcard)
-
-    let newradio = document.createElement('input').setAttribute('type', 'radio')
-    newcard.appendChild(newradio)
-
-    let newspan = document.createElement('span')
-    newspan.textContent = task
-    newcard.appendChild(newspan)
-    
-
-    let newcross = document.createElement('button')
-    newcross.innerHTML = "&times;"
-    newcard.appendChild(newcross)
-    
-}
-
-
-
 /*function displayTask(task) {
 
     tasksContainer.innerHTML = `
@@ -49,41 +29,46 @@ let onEnter = function output1(task){
 }*/
 
 let num = 0
+let qty = 0
 
 function output(task){
 
     num++
+    qty++
+
+    
 
     let newcard = document.createElement('div')
     let newElementRadio = document.createElement('input')
     let newElementInput = document.createElement('span')
     let newElementcross = document.createElement('button')
+  
+    //console.log(newElementCross);
 
-    //newElementInput.textContent = task
-    
-   // console.log(newElementCross);
-
-    
     tasksContainer.appendChild(newcard).classList.add('task-card')
     newcard.appendChild(newElementRadio).setAttribute('type', 'radio')
     newcard.appendChild(newElementInput).textContent = task
     newcard.appendChild(newElementcross).setAttribute('id', 'bt')
-   //.classList.add('card-btn')
+    //.classList.add('card-btn')
 
     tasksContainer.lastChild.setAttribute('id', `${num}`)
+    console.log(num);
+    console.log(qty)
+
+    document.getElementById(`${num}`).addEventListener('click', function() {
+        //console.log(this.parentNode);
+        //let removeCard = this.parentNode
+        
+        newcard.remove(this)
+        
+    })
+
 }
 
+const taskQty = document.getElementById("items-num");
 
-const btn = document.getElementById('bt')
-console.log(btn)
-//btn.addEventListener('click', remove) 
+taskQty.innerText = qty
 
-function remove(){
-    //let div = btn.parentNode//   document.getElementsByClassName('task-card')
-    //div.remove(div)
-    console.log(btn.parentNode);
 
-    btn.parentNode.removeChild()
-}
 
 
