@@ -1,6 +1,6 @@
 const tasksContainer = document.getElementById("dom-space-div");
 const taskInput = document.querySelector("#input-task"); 
-
+const taskQty = document.getElementById("items-num");
 
 taskInput.addEventListener("keydown", (e) => {
 
@@ -60,14 +60,17 @@ function output(task){
         //let removeCard = this.parentNode
         
         newcard.remove(this)
-        
+        qty--
+        taskQty.innerText = qty
     })
+
+    taskQty.innerText = qty
 
 }
 
-const taskQty = document.getElementById("items-num");
 
-taskQty.innerText = qty
+
+
 
 
 
