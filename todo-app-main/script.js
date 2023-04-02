@@ -211,7 +211,7 @@ function addCompDiv(dataCom){
 //NEW CODE*****************************************************************************
 
 let id = 0
-let qty = 0
+
 
 //submit task name
 taskInput.addEventListener("keydown", (e) => {
@@ -232,7 +232,7 @@ taskInput.addEventListener("keydown", (e) => {
 function addTask(task) {
 
     id++
-    qty++
+    //qty++
 
     data.push({
         id: `${id}`,
@@ -242,7 +242,11 @@ function addTask(task) {
     
     addAllDiv(data)
 
-    taskQty.innerText = qty
+    dataAct = data.filter((t) => {
+        return t.completed === false
+    })
+
+    taskQty.innerText = dataAct.length
 
 }
 
@@ -288,11 +292,12 @@ function addAllDiv(data){
 //Get id of the button pressed and set as completed and sort arrays
 function getClickID(clickID){
     //console.log(clickID)
+
+    
+
     let btnColor = document.getElementById(clickID)
 
     btnColor.style.backgroundColor = "red"
-
-    //dataAct = []
 
     for(let i = 0; i < data.length; i++){
         if(data[i].id +'-comp'== clickID) {
@@ -311,6 +316,8 @@ function getClickID(clickID){
         return t.completed === false
     })
 
+    taskQty.innerText = dataAct.length
+
     console.log(data);
     console.log(dataCom);
     console.log(dataAct);
@@ -319,6 +326,69 @@ function getClickID(clickID){
 /*document.querySelectorAll('task-card').forEach((e) => {
     e.onclick = (e) => console.log(e.currentTarget.id)
 })*/
+
+//filter only completed tasks
+let com = document.getElementById('com')
+
+com.addEventListener('click', function(){
+
+    const compList = dataCom.map((comp) => {
+
+        const { id, task } = comp;
+
+        return `
+        <div class="task-card" id="${id}">
+            <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+            <span>${task}</span>
+            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+        </div>
+        `;    
+
+        }).join("");
+
+    //tasksContainer.firstChild.setAttribute('id', num)
+    
+    tasksContainerAct.innerHTML = ''
+    tasksContainer.innerHTML = ''
+    tasksContainerCom.innerHTML = compList;
+
+})
+
+//filter only active tasks
+let act = document.getElementById('act')
+
+act.addEventListener('click', function(){
+
+    const actList = dataAct.map((act) => {
+
+        const { id, task } = act;
+
+        return `
+        <div class="task-card" id="${id}">
+            <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+            <span>${task}</span>
+            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+        </div>
+        `;    
+
+        }).join("");
+
+    //tasksContainer.firstChild.setAttribute('id', num)
+    
+    tasksContainerCom.innerHTML = ''
+    tasksContainer.innerHTML = ''
+    tasksContainerAct.innerHTML = actList;
+
+})
+
+//filter all tasks
+let all = document.getElementById('all')
+
+all.addEventListener('click', function(){
+
+    addAllDiv(data)
+
+})
 
 
 function clearAll(){
