@@ -263,7 +263,7 @@ function addAllDiv(data){
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
             <span>${task}</span>
-            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+            <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;
 
@@ -273,7 +273,7 @@ function addAllDiv(data){
         <div class="task-card" id="${id}">
             <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
             <span>${task}</span>
-            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+            <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
         
@@ -292,8 +292,6 @@ function addAllDiv(data){
 //Get id of the button pressed and set as completed and sort arrays
 function getClickID(clickID){
     //console.log(clickID)
-
-    
 
     let btnColor = document.getElementById(clickID)
 
@@ -340,7 +338,7 @@ com.addEventListener('click', function(){
         <div class="task-card" id="${id}">
             <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
             <span>${task}</span>
-            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+            <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
 
@@ -365,7 +363,7 @@ act.addEventListener('click', function(){
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
             <span>${task}</span>
-            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+            <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
 
@@ -406,7 +404,7 @@ comClr.addEventListener('click', function(){
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
             <span>${task}</span>
-            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+            <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
 
@@ -417,3 +415,116 @@ comClr.addEventListener('click', function(){
     tasksContainerAct.innerHTML = actList;
 
 })
+
+//clear completed item from lists
+function getID(ID) {
+    
+    for(let i = 0; i < data.length; i++){
+        if(data[i].id +'-clr'== ID) {
+            data.splice(i, 1)
+            break;
+        } 
+    }
+
+    for(let i = 0; i < dataCom.length; i++){
+        if(dataCom[i].id +'-clr'== ID) {
+            dataCom.splice(i, 1)
+            break;
+        } 
+    }
+
+    for(let i = 0; i < dataAct.length; i++){
+        if(dataAct[i].id +'-clr'== ID) {
+            dataAct.splice(i, 1)
+            break;
+        } 
+    }
+
+    //update items left
+    taskQty.innerText = dataAct.length
+    //console.log(data)
+
+    //render the dom on the current filter
+    let space = document.getElementById(ID)
+    //console.log(space.parentNode.parentNode)
+
+    if(tasksContainerAct == space.parentNode.parentNode){
+        
+        const actList = dataAct.map((act) => {
+
+            const { id, task } = act;
+    
+            return `
+            <div class="task-card" id="${id}">
+                <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+                <span>${task}</span>
+                <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
+            </div>
+            `;    
+    
+            }).join("");
+        
+        tasksContainerCom.innerHTML = ''
+        tasksContainer.innerHTML = ''
+        tasksContainerAct.innerHTML = actList;
+
+    } else if (tasksContainerCom == space.parentNode.parentNode) {
+
+        const compList = dataCom.map((comp) => {
+
+            const { id, task } = comp;
+    
+            return `
+            <div class="task-card" id="${id}">
+                <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+                <span>${task}</span>
+                <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
+            </div>
+            `;    
+    
+            }).join("");
+        
+        tasksContainerAct.innerHTML = ''
+        tasksContainer.innerHTML = ''
+        tasksContainerCom.innerHTML = compList;
+
+    } else {
+        
+        const allList = data.map((all) => {
+
+            const { id, task, completed } = all;
+            
+            if(completed === false) {
+    
+            return `
+            <div class="task-card" id="${id}">
+                <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+                <span>${task}</span>
+                <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
+            </div>
+            `;
+    
+            } else if(completed === true) {
+    
+            return `
+            <div class="task-card" id="${id}">
+                <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+                <span>${task}</span>
+                <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
+            </div>
+            `;    
+            
+            }
+    
+            }).join("");
+            
+        tasksContainerCom.innerHTML = ''
+        tasksContainerAct.innerHTML = ''
+        tasksContainer.innerHTML = allList;
+
+    }
+
+}
+
+
+
