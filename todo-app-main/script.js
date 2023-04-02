@@ -285,11 +285,14 @@ function addAllDiv(data){
 
 }
 
+//Get id of the button pressed and set as completed and sort arrays
 function getClickID(clickID){
     //console.log(clickID)
     let btnColor = document.getElementById(clickID)
 
     btnColor.style.backgroundColor = "red"
+
+    //dataAct = []
 
     for(let i = 0; i < data.length; i++){
         if(data[i].id +'-comp'== clickID) {
@@ -297,10 +300,20 @@ function getClickID(clickID){
             
             dataCom.push(data[i])
             break;
-        }
+        } 
     }
 
+    dataCom = data.filter((t) => {
+        return t.completed === true
+    })
+
+    dataAct = data.filter((t) => {
+        return t.completed === false
+    })
+
     console.log(data);
+    console.log(dataCom);
+    console.log(dataAct);
 }
 
 /*document.querySelectorAll('task-card').forEach((e) => {
