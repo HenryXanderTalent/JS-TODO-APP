@@ -345,8 +345,6 @@ com.addEventListener('click', function(){
         `;    
 
         }).join("");
-
-    //tasksContainer.firstChild.setAttribute('id', num)
     
     tasksContainerAct.innerHTML = ''
     tasksContainer.innerHTML = ''
@@ -372,8 +370,6 @@ act.addEventListener('click', function(){
         `;    
 
         }).join("");
-
-    //tasksContainer.firstChild.setAttribute('id', num)
     
     tasksContainerCom.innerHTML = ''
     tasksContainer.innerHTML = ''
@@ -390,8 +386,34 @@ all.addEventListener('click', function(){
 
 })
 
+//clear completed lists
+let comClr = document.getElementById('clear-comp')
 
-function clearAll(){
+comClr.addEventListener('click', function(){
 
+    dataCom = []
+    //or dataCom.splice(0,dataCom.length)
 
-}
+    data = data.filter((t) => {
+        return t.completed !== true
+    })
+
+    const actList = dataAct.map((act) => {
+
+        const { id, task } = act;
+
+        return `
+        <div class="task-card" id="${id}">
+            <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+            <span>${task}</span>
+            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+        </div>
+        `;    
+
+        }).join("");
+    
+    tasksContainerCom.innerHTML = ''
+    tasksContainer.innerHTML = ''
+    tasksContainerAct.innerHTML = actList;
+
+})
