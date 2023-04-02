@@ -1,11 +1,22 @@
 //data object
 
+//array for all
 let data = []
+//array for completed only
+let dataCom = []
+//array for active only
+let dataAct = []
+//have 3 div space for the dom in html. when button is pressed hide others = set display to none
+//setting a task as comp removes it from act arr and adds to com arr
 
+const tasksContainerAct = document.getElementById("dom-space-div-act");
+const tasksContainerCom = document.getElementById("dom-space-div-com");
 const tasksContainer = document.getElementById("dom-space-div");
 const taskInput = document.querySelector("#input-task"); 
 const taskQty = document.getElementById("items-num");
 
+/*
+//create task name
 taskInput.addEventListener("keydown", (e) => {
 
     const press = e.key;
@@ -15,26 +26,15 @@ taskInput.addEventListener("keydown", (e) => {
         output(e.target.value);
         //displayTask(e.target.value);
         //console.log(e.target.value);
-
+        taskInput.value = '' 
     }
 
 });
 
-/*function displayTask(task) {
-
-    tasksContainer.innerHTML = `
-    <div class="task-card">
-      <input type="radio" />
-      <span >${task}</span>
-      <button type="button">&times;</button>
-    </div>
-    `;
-
-}*/
-
 let num = 0
 let qty = 0
 
+//add task to array
 function output(task){
 
     num++
@@ -43,16 +43,18 @@ function output(task){
     data.push({
         id: `${num}`,
         task: `${task}`,
-        progress: true,
-        deleted: false
+        progress: true
+        //deleted: false
     })
 
     console.log(data)
 
+    //addDiv1()
     addDiv(num, task)
     //console.log(num);
     //console.log(qty)
 
+    //clear the task from list
     let prs = document.getElementById(`${num}`)
     //console.log(prs.lastChild)
     prs.lastChild.addEventListener('click', function(){
@@ -68,6 +70,7 @@ function output(task){
 
     })
 
+    //set task as complete
     let rdo = document.getElementById(`${num}`)
     //console.log(rdo.firstChild)
     rdo.firstChild.addEventListener('click', function(){
@@ -79,19 +82,21 @@ function output(task){
         for(let i = 0; i < data.length; i++){
             if(data[i].id === rdoID) {
                 data[i].progress = false
+                
+                dataCom.push(data[i])
                 break;
             }
         }
-
-        console.log(data)
-
-        //filter through objects to find it and set progress to false
+        console.log(dataCom)
+        //console.log(data)
+        
     })
 
     taskQty.innerText = qty
 
 }
 
+//delete task from array
 function deleteTask(id) {
      
     for(let i = 0; i < data.length; i++){
@@ -100,17 +105,11 @@ function deleteTask(id) {
             break;
         }
     }
-
-    //displayTasks()
-
-    /*let dataFiltered = data
-
-    data = dataFiltered.filter(function(t) {
-        return t.id !== id
-    })*/
  
 }
 
+
+//add task to list
 function addDiv(num, task) {
 
         let newcard = document.createElement('div')
@@ -126,35 +125,190 @@ function addDiv(num, task) {
         newcard.appendChild(newElementcross).setAttribute('class', 'bt')
         //.classList.add('card-btn')
 
-        displayTasks()
+        for(let i = 0; i < data.length; i++) {
+
+            tasksContainer.lastChild.setAttribute('id', num)
     
+        }
+    
+}
+
+function addDiv1() {
+
+    const allList = data.map((comp) => {
+
+        const { num, task } = comp;
+
+        return `
+        <div class="task-card">
+          <input type="radio" id="${task}"/>
+          <span >${task}</span>
+          <button type="button" id="${num}">&times;</button>
+        </div>
+        `;
+    }).join("");
+    
+    tasksContainer.innerHTML = allList;
+
 }
 
 function displayTasks() {
 
     //for each item in arr display it
-    for(let i = 0; i < data.length; i++) {
 
-        tasksContainer.lastChild.setAttribute('id', num)
-
-    }
 }
 
-/*document.getElementById(`${num}`).addEventListener('click', function(){
-      //console.log(this.parentNode);
-    //let removeCard = this.parentNode   
-    
-    newcard.remove(this)
-    qty--
-    taskQty.innerText = qty
+//filter only completed tasks
+let com = document.getElementById('com')
+//console.log(prs.lastChild)
+com.addEventListener('click', function(){
 
-    //console.log(this.getAttribute('id'))
-    deleteTask(this.getAttribute('id'))
+    let dataFiltered = data
 
+    dataFiltered = dataFiltered.filter(function(t) {
+        return t.progress === false
+    })
+
+    console.log(dataFiltered)
+
+    for(let i = 0; i < dataFiltered.length; i++) {
+
+        if(dataFiltered[i].progress === false){
+
+            addDiv(dataFiltered[i].id, dataFiltered[i].task)
+            
+
+        }
+   
+    }
+       
     console.log(data)
+    addCompDiv()
+})
+
+
+function addCompDiv(dataCom){
+    
+    const compList = dataCom.map((comp) => {
+
+        const { task } = comp;
+
+        return `
+        <div class="task-card">
+          <input type="radio" id="${task}"/>
+          <span >${task}</span>
+          <button type="button">&times;</button>
+        </div>
+        `;
+    }).join("");
+    tasksContainer.innerHTML = ''
+    tasksContainerCom.innerHTML = compList;
+
 }*/
 
+//change radio input to button
+
+//NEW CODE*****************************************************************************
+
+let id = 0
+let qty = 0
+
+//submit task name
+taskInput.addEventListener("keydown", (e) => {
+
+    const press = e.key;
+
+    if(press === 'Enter') {
+
+        addTask(e.target.value);
+      
+        taskInput.value = '' 
+
+    }
+
+});
+
+//add task to array
+function addTask(task) {
+
+    id++
+    qty++
+
+    data.push({
+        id: `${id}`,
+        task: `${task}`,
+        completed: false
+    })
+    
+    addAllDiv(data)
+
+    taskQty.innerText = qty
+
+}
+
+//display all tasks
+function addAllDiv(data){
+    
+    const allList = data.map((all) => {
+
+        const { id, task, completed } = all;
+        
+        if(completed === false) {
+
+        return `
+        <div class="task-card" id="${id}">
+            <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+            <span>${task}</span>
+            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+        </div>
+        `;
+
+        } else if(completed === true) {
+
+        return `
+        <div class="task-card" id="${id}">
+            <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
+            <span>${task}</span>
+            <button class="clr-btn" type="button" id="${id + '-clr'}">&times;</button>
+        </div>
+        `;    
+        
+        }
+
+        }).join("");
+
+    //tasksContainer.firstChild.setAttribute('id', num)
+    
+    tasksContainerCom.innerHTML = ''
+    tasksContainerAct.innerHTML = ''
+    tasksContainer.innerHTML = allList;
+
+}
+
+function getClickID(clickID){
+    //console.log(clickID)
+    let btnColor = document.getElementById(clickID)
+
+    btnColor.style.backgroundColor = "red"
+
+    for(let i = 0; i < data.length; i++){
+        if(data[i].id +'-comp'== clickID) {
+            data[i].completed = true
+            
+            dataCom.push(data[i])
+            break;
+        }
+    }
+
+    console.log(data);
+}
+
+/*document.querySelectorAll('task-card').forEach((e) => {
+    e.onclick = (e) => console.log(e.currentTarget.id)
+})*/
 
 
+function clearAll(){
 
 
+}
