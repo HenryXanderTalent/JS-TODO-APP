@@ -2,137 +2,188 @@ body{
     margin: 0;
     background-image: url("./images/bg-desktop-light.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
-    background-color: lightgray;
+    background-color: hsl(236, 33%, 92%);
+    font-size: 18px;
+    font-family: "Josefin Sans", sans-serif;
+    
 }
 
+body.dark{
+    background-color: black;
+    background-image: url("./images/bg-desktop-dark.jpg");
+}
+
+/*HEADER SECTION*/
 .todo-header {
-    color: white;
+    color: hsl(0, 0%, 98%);
     display: flex;
     width: 500px;
     margin: auto;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.game {
-    text-align: left;   
+img{
+    width: 25px;
+    height: 25px;
 }
 
+/*ENTER TASK SECTION*/
 .input-task-div {
-    background-color: white;
+    background-color: hsl(0, 0%, 98%);
     width: 500px;
     border-radius: 3px;
     margin: 0px auto 15px auto;
     padding-top: 10px;
     padding-bottom: 10px;
+    display: flex;
 }
 
 #radio-input {
     margin-left: 10px;
-    
 }
 
+#input-task{
+    border: none;
+    width: 90%;
+    outline: none;
+    background-color: hsl(0, 0%, 98%);
+}
+
+/*DOM SECTION - TASKS*/
 .task-card {
-    background-color: white;
+    background-color: hsl(0, 0%, 98%);
     width: 500px;
     margin: 0px auto;
     padding: 10px 0px;
     display: flex;
     border-bottom: 1px solid black;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    position: relative;
 }
 
 .comp-btn-blue{
     width: 15px;
     height: 15px;
     border-radius: 7.5px;
-    color: black;
+    color: hsl(233, 11%, 84%);
     margin: 5px 10px;
-    background-color: blue;
+    background-color: hsl(0, 0%, 98%);
 }
 
 .comp-btn-red{
     width: 15px;
     height: 15px;
     border-radius: 7.5px;
-    color: black;
-    margin: 5px 10px;
-    background-color: red;
+    color: hsl(233, 11%, 84%);
+    margin: 0px 10px;
+    background-image: url("./images/icon-check.svg");
+    background-color: hsl(220, 98%, 61%);
 }
 
-.clr-btn {
-    font-size: 20px;
+.clr-btn{
     border: 0;
-    
-    position: relative;
-    right: -400px;
-    cursor: pointer;
-    
-    color: black;
+    position: absolute;
+    right: 10px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    color: transparent;
+    margin-top: 5px;
 }
 
-.task-card:hover button {
-    color: black;
+.task-card:hover .clr-btn{
+    background-image: url("./images/icon-cross.svg");
+    background-size: 15px;
 }
 
-.tasks {
+.task-card{
+    font-weight: 700; 
+}
+
+/*FILTER DIV*/
+.tasks{
     background-color: white;
     width: 500px;
     margin: auto;
     padding: 10px 0px;
     display: flex;
-    
+    font-weight: 400;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
-#items-left {
+#dyn-num-div{
+    width: 30%; 
+}
+
+#items-left{
     padding: 10px 0px;
-    
+    color: hsl(236, 9%, 61%);
 }
 
-#items-num {
+#items-num{
     padding: 10px 0px 10px 10px;
+    color: hsl(236, 9%, 61%);
 }
 
-#clear-comp-div {
-    
+#clear-comp-div{
     margin: auto;  
-    
     width: 30%;
 }
 
-#clear-comp {
+#clear-comp{
     display: flex;
     margin: auto;
     justify-content: right;
     padding-right: 10px;
+    color: hsl(235, 19%, 35%);
 }
 
-#filter-div {
+#clear-comp:hover{
+    color: black;
+}
+
+#filter-div{
     display: flex;
     margin: auto;
-   
     width: 40%;
     align-items: center;
-}
-
-#all{
-    padding: 0px 5px;
-    margin: auto;
 }
 
 #com{
     padding: 0px 5px;
     margin: auto;
+    color: hsl(235, 19%, 35%);
 }
 
 #com:hover{
-    color: blue;
+    color: black;
 }
 
 #act{
     padding: 0px 5px;
     margin: auto;
+    color: hsl(235, 19%, 35%);
 }
 
-#dyn-num-div{
-    width: 30%;
-       
+#act:hover{
+    color: black;
+    
+}
+
+#all{
+    padding: 0px 5px;
+    margin: auto;
+    color: hsl(235, 19%, 35%);
+}
+
+#all:hover{
+    color: black;
+}
+
+/*FOOTER SECTION*/
+
+.attribution{
+    margin: 20px;
 }

@@ -8,11 +8,12 @@
   
   <link rel="stylesheet" href="./style.css">
 
+  <link rel="stylesheet" href="https://fonts.google.com/specimen/Josefin+Sans">
+
   <script defer src="./script.js"></script>
   
-  <title>Frontend Mentor | Todo app</title>
+  <title>Henry Opara | Todo App</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
@@ -23,11 +24,12 @@
 <header>
   <div class="todo-header">
     <h1 class="game">TODO</h1>
+    <img src="./images/icon-moon.svg" alt="moon/sun icon" id="toggleDark" onclick="changeImage()">
   </div>
 </header>
 
 <main>
-
+  <!--Enter/add task-->
   <section>
     <div class="input-task-div">
       <input id="radio-input"  type="radio" disabled/>
@@ -35,6 +37,7 @@
     </div>
   </section> 
 
+  <!--DOM area-->
   <section>
     <div>
 
@@ -50,17 +53,18 @@
 
       </div>
 
+      <!--Filter section-->
       <div class="tasks">
         <div id="dyn-num-div"> 
           <span id="items-num">0</span>
           <span id="items-left">items left</span>
         </div>
 
-          <!--buttons/hrefs/or spans-->
+          
         <div id="filter-div">
-          <span id="all">All</span>
-          <span id="act">Active</span>
-          <span id="com">Completed</span>
+          <span id="all" onclick="findID(this.id)">All</span>
+          <span id="act" onclick="findID(this.id)">Active</span>
+          <span id="com" onclick="findID(this.id)">Completed</span>
         </div>
 
         <div id="clear-comp-div">
@@ -71,38 +75,27 @@
     </div>
   </section>
 
-<section>
+  <section>
+    <!--<p>Drag and drop to reorder list</p>
+    to be implemented before uncommenting-->
+  </section>
 
-  <p>Drag and drop to reorder list</p>
-</section>  
 </main>
 
 <footer>
 
   <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Henry Opara</a>.
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor via Xander Talent</a>. 
+    Coded by <a href="https://www.linkedin.com/in/henry-c-56323720b/">Henry Opara</a>.
   </div>
 
 </footer>
 </body>
 </html>
 
-<!--For this project, users should be able to:
--View the optimal layout for the app depending on their device's screen size - ask oli
--See hover states for all interactive elements on the page
 
 
 
 
--Clear all completed todos
--Toggle light and dark mode
 
-Bonus points:
 
--Drag and drop to reorder items on the list
-
-General Requirements:
-
--HTML Code should be written as semantically as possible.
--Commits to your repo should be made frequently, after every update or bug fix.-->

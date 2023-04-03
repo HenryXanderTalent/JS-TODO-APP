@@ -1,217 +1,19 @@
-//data object
-
 //array for all
 let data = []
 //array for completed only
 let dataCom = []
 //array for active only
 let dataAct = []
-//have 3 div space for the dom in html. when button is pressed hide others = set display to none
-//setting a task as comp removes it from act arr and adds to com arr
 
+//Key DOM area selectors
 const tasksContainerAct = document.getElementById("dom-space-div-act");
 const tasksContainerCom = document.getElementById("dom-space-div-com");
 const tasksContainer = document.getElementById("dom-space-div");
 const taskInput = document.querySelector("#input-task"); 
 const taskQty = document.getElementById("items-num");
 
-/*
-//create task name
-taskInput.addEventListener("keydown", (e) => {
-
-    const press = e.key;
-
-    if(press === 'Enter') {
-
-        output(e.target.value);
-        //displayTask(e.target.value);
-        //console.log(e.target.value);
-        taskInput.value = '' 
-    }
-
-});
-
-let num = 0
-let qty = 0
-
-//add task to array
-function output(task){
-
-    num++
-    qty++
-
-    data.push({
-        id: `${num}`,
-        task: `${task}`,
-        progress: true
-        //deleted: false
-    })
-
-    console.log(data)
-
-    //addDiv1()
-    addDiv(num, task)
-    //console.log(num);
-    //console.log(qty)
-
-    //clear the task from list
-    let prs = document.getElementById(`${num}`)
-    //console.log(prs.lastChild)
-    prs.lastChild.addEventListener('click', function(){
-      
-        tasksContainer.removeChild(this.parentNode)
-        qty--
-        taskQty.innerText = qty
-    
-        //console.log(this.getAttribute('id'))
-        deleteTask(this.parentNode.getAttribute('id'))
-    
-        console.log(data)
-
-    })
-
-    //set task as complete
-    let rdo = document.getElementById(`${num}`)
-    //console.log(rdo.firstChild)
-    rdo.firstChild.addEventListener('click', function(){
-
-        //console.log(rdo.getAttribute('id'))
-
-        let rdoID = rdo.getAttribute('id')
-
-        for(let i = 0; i < data.length; i++){
-            if(data[i].id === rdoID) {
-                data[i].progress = false
-                
-                dataCom.push(data[i])
-                break;
-            }
-        }
-        console.log(dataCom)
-        //console.log(data)
-        
-    })
-
-    taskQty.innerText = qty
-
-}
-
-//delete task from array
-function deleteTask(id) {
-     
-    for(let i = 0; i < data.length; i++){
-        if(data[i].id === id) {
-            data.splice(i, 1)
-            break;
-        }
-    }
- 
-}
-
-
-//add task to list
-function addDiv(num, task) {
-
-        let newcard = document.createElement('div')
-        let newElementRadio = document.createElement('input')
-        let newElementInput = document.createElement('span')
-        let newElementcross = document.createElement('button')
-      
-        //console.log(newElementCross);
-    
-        tasksContainer.appendChild(newcard).classList.add('task-card')
-        newcard.appendChild(newElementRadio).setAttribute('type', 'radio')
-        newcard.appendChild(newElementInput).textContent = task
-        newcard.appendChild(newElementcross).setAttribute('class', 'bt')
-        //.classList.add('card-btn')
-
-        for(let i = 0; i < data.length; i++) {
-
-            tasksContainer.lastChild.setAttribute('id', num)
-    
-        }
-    
-}
-
-function addDiv1() {
-
-    const allList = data.map((comp) => {
-
-        const { num, task } = comp;
-
-        return `
-        <div class="task-card">
-          <input type="radio" id="${task}"/>
-          <span >${task}</span>
-          <button type="button" id="${num}">&times;</button>
-        </div>
-        `;
-    }).join("");
-    
-    tasksContainer.innerHTML = allList;
-
-}
-
-function displayTasks() {
-
-    //for each item in arr display it
-
-}
-
-//filter only completed tasks
-let com = document.getElementById('com')
-//console.log(prs.lastChild)
-com.addEventListener('click', function(){
-
-    let dataFiltered = data
-
-    dataFiltered = dataFiltered.filter(function(t) {
-        return t.progress === false
-    })
-
-    console.log(dataFiltered)
-
-    for(let i = 0; i < dataFiltered.length; i++) {
-
-        if(dataFiltered[i].progress === false){
-
-            addDiv(dataFiltered[i].id, dataFiltered[i].task)
-            
-
-        }
-   
-    }
-       
-    console.log(data)
-    addCompDiv()
-})
-
-
-function addCompDiv(dataCom){
-    
-    const compList = dataCom.map((comp) => {
-
-        const { task } = comp;
-
-        return `
-        <div class="task-card">
-          <input type="radio" id="${task}"/>
-          <span >${task}</span>
-          <button type="button">&times;</button>
-        </div>
-        `;
-    }).join("");
-    tasksContainer.innerHTML = ''
-    tasksContainerCom.innerHTML = compList;
-
-}*/
-
-//change radio input to button
-
-//NEW CODE*****************************************************************************
-
+//ID for each task added
 let id = 0
-
 
 //submit task name
 taskInput.addEventListener("keydown", (e) => {
@@ -232,7 +34,6 @@ taskInput.addEventListener("keydown", (e) => {
 function addTask(task) {
 
     id++
-    //qty++
 
     data.push({
         id: `${id}`,
@@ -250,7 +51,7 @@ function addTask(task) {
 
 }
 
-//display all tasks
+//display all tasks in the DOM
 function addAllDiv(data){
     
     const allList = data.map((all) => {
@@ -262,7 +63,7 @@ function addAllDiv(data){
         return `
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-            <span>${task}</span>
+            <span id="${id + '-compSpan'}">${task}</span>
             <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;
@@ -270,9 +71,9 @@ function addAllDiv(data){
         } else if(completed === true) {
 
         return `
-        <div class="task-card" id="${id}">
+        <div class="task-card" id="${id}" draggable="true">
             <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-            <span>${task}</span>
+            <span id="${id + '-compSpan'}">${task}</span>
             <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
@@ -280,8 +81,6 @@ function addAllDiv(data){
         }
 
         }).join("");
-
-    //tasksContainer.firstChild.setAttribute('id', num)
     
     tasksContainerCom.innerHTML = ''
     tasksContainerAct.innerHTML = ''
@@ -295,7 +94,12 @@ function getClickID(clickID){
 
     let btnColor = document.getElementById(clickID)
 
-    btnColor.style.backgroundColor = "red"
+    btnColor.style.backgroundImage = "./images/icon-check.svg"
+    btnColor.style.backgroundColor = "hsl(220, 98%, 61%)"
+    
+    let textColor = document.getElementById(clickID + 'Span')
+    textColor.style.color = "hsl(233, 11%, 84%)"
+    textColor.style.textDecoration = "line-through"
 
     for(let i = 0; i < data.length; i++){
         if(data[i].id +'-comp'== clickID) {
@@ -337,7 +141,7 @@ com.addEventListener('click', function(){
         return `
         <div class="task-card" id="${id}">
             <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-            <span>${task}</span>
+            <span id="${id + '-compSpan'}">${task}</span>
             <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
@@ -362,7 +166,7 @@ act.addEventListener('click', function(){
         return `
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-            <span>${task}</span>
+            <span id="${id + '-compSpan'}">${task}</span>
             <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
@@ -403,7 +207,7 @@ comClr.addEventListener('click', function(){
         return `
         <div class="task-card" id="${id}">
             <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-            <span>${task}</span>
+            <span id="${id + '-compSpan'}">${task}</span>
             <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
         </div>
         `;    
@@ -440,7 +244,7 @@ function getID(ID) {
         } 
     }
 
-    //update items left
+    //update items left 
     taskQty.innerText = dataAct.length
     //console.log(data)
 
@@ -457,7 +261,7 @@ function getID(ID) {
             return `
             <div class="task-card" id="${id}">
                 <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-                <span>${task}</span>
+                <span id="${id + '-compSpan'}">${task}</span>
                 <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
             </div>
             `;    
@@ -477,7 +281,7 @@ function getID(ID) {
             return `
             <div class="task-card" id="${id}">
                 <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-                <span>${task}</span>
+                <span id="${id + '-compSpan'}">${task}</span>
                 <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
             </div>
             `;    
@@ -499,7 +303,7 @@ function getID(ID) {
             return `
             <div class="task-card" id="${id}">
                 <button class="comp-btn-blue" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-                <span>${task}</span>
+                <span id="${id + '-compSpan'}">${task}</span>
                 <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
             </div>
             `;
@@ -509,7 +313,7 @@ function getID(ID) {
             return `
             <div class="task-card" id="${id}">
                 <button class="comp-btn-red" type="button" id="${id + '-comp'}" onclick="getClickID(this.id)"></button>
-                <span>${task}</span>
+                <span id="${id + '-compSpan'}">${task}</span>
                 <button class="clr-btn" type="button" id="${id + '-clr'}" onclick="getID(this.id)">&times;</button>
             </div>
             `;    
@@ -526,5 +330,67 @@ function getID(ID) {
 
 }
 
+//to highlight text based on filter mode
+function findID(fid) {
 
+    let filter = document.getElementById(fid)
 
+    //should be while but keeps crashing machine/app
+    //if(tasksContainer.innerHTML !== ''){
+    //    filter.style.color = "hsl(220, 98%, 61%)"
+    //} 
+}
+
+//toggle light/dark
+const toggle = document.getElementById('toggleDark');
+const body = document.querySelector('body');
+
+toggle.addEventListener('click', function(){
+
+    document.body.classList.toggle('dark')
+    
+})
+
+//toggle light/dark mode image/button
+function changeImage(){
+
+    let displayImage = document.getElementById('toggleDark')
+
+    if(displayImage.src.match('./images/icon-moon.svg')) {
+
+        displayImage.src = './images/icon-sun.svg'
+
+    } else {
+
+        displayImage.src = './images/icon-moon.svg'
+
+    }
+}
+
+//reference code for future projects********************
+//alternative way to add new elements to the DOM
+
+/*
+//add task to list
+function addDiv(num, task) {
+
+        let newcard = document.createElement('div')
+        let newElementRadio = document.createElement('input')
+        let newElementInput = document.createElement('span')
+        let newElementcross = document.createElement('button')
+      
+        //console.log(newElementCross);
+    
+        tasksContainer.appendChild(newcard).classList.add('task-card')
+        newcard.appendChild(newElementRadio).setAttribute('type', 'radio')
+        newcard.appendChild(newElementInput).textContent = task
+        newcard.appendChild(newElementcross).setAttribute('class', 'bt')
+        //.classList.add('card-btn')
+
+        for(let i = 0; i < data.length; i++) {
+
+            tasksContainer.lastChild.setAttribute('id', num)
+    
+        }
+    
+}*/
