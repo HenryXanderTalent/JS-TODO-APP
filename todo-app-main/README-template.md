@@ -110,8 +110,8 @@ I would like to learn more about using frameworks for CSS like SASS, this would 
 
 ### Useful resources
 
-- [MDN]([https://www.example.com](https://developer.mozilla.org/en-US/docs/Learn)) - This helped me with code structure and syntax.
-- [W3Schools]([https://www.example.com](https://www.w3schools.com/)) - This is helped me write functions for onclick events to get IDs of elements in the DOM.
+- [MDN](https://developer.mozilla.org/en-US/docs/Learn) - This helped me with code structure and syntax.
+- [W3Schools](https://www.w3schools.com/) - This is helped me write functions for onclick events to get IDs of elements in the DOM.
 
 ## Author
 
