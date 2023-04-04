@@ -115,7 +115,7 @@ I would like to learn more about using frameworks for CSS like SASS, this would 
 
 ## Author
 
-- Linkedin - [Henry Opara]([https://www.your-site.com](https://www.linkedin.com/in/henry-c-56323720b/))
+- Linkedin - [Henry Opara](https://www.linkedin.com/in/henry-c-56323720b/)
 
 ## Acknowledgments
 
